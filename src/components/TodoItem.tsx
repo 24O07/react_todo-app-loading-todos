@@ -4,9 +4,11 @@ import { Todo } from '../types/Todo';
 
 interface Props {
   todo: Todo;
+  onDelete: (id: number) => void;
+  isLoading: boolean;
 }
 
-export const TodoItem: React.FC<Props> = ({ todo }) => {
+export const TodoItem: React.FC<Props> = ({ todo, onDelete, isLoading }) => {
   return (
     <div data-cy="Todo" className={cn('todo', { completed: todo.completed })}>
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
@@ -24,11 +26,19 @@ export const TodoItem: React.FC<Props> = ({ todo }) => {
         {todo.title}
       </span>
 
-      <button type="button" className="todo__remove" data-cy="TodoDelete">
+      <button
+        type="button"
+        className="todo__remove"
+        data-cy="TodoDelete"
+        onClick={() => onDelete(todo.id)}
+      >
         ×
       </button>
 
-      <div data-cy="TodoLoader" className="modal overlay">
+      <div
+        data-cy="TodoLoader"
+        className={cn('modal overlay', { 'is-active': isLoading })}
+      >
         <div
           className="modal-background
                      has-background-white-ter"

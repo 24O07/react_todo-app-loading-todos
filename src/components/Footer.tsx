@@ -5,9 +5,17 @@ interface Props {
   filter: string;
   setFilter: (filter: string) => void;
   activeCount: number;
+  onClearCompleted: () => void;
+  hasCompleted: boolean;
 }
 
-export const Footer: React.FC<Props> = ({ filter, setFilter, activeCount }) => {
+export const Footer: React.FC<Props> = ({
+  filter,
+  setFilter,
+  activeCount,
+  onClearCompleted,
+  hasCompleted,
+}) => {
   return (
     <footer className="todoapp__footer" data-cy="Footer">
       <span className="todo-count" data-cy="TodosCounter">
@@ -47,7 +55,8 @@ export const Footer: React.FC<Props> = ({ filter, setFilter, activeCount }) => {
         type="button"
         className="todoapp__clear-completed"
         data-cy="ClearCompletedButton"
-        style={{ visibility: 'hidden' }}
+        style={{ visibility: hasCompleted ? 'visible' : 'hidden' }}
+        onClick={onClearCompleted}
       >
         Clear completed
       </button>
