@@ -6,7 +6,6 @@ import { TodoList } from './components/TodoList';
 import { Footer } from './components/Footer';
 import { ErrorNotification } from './components/ErrorNotification';
 
-
 export const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [filter, setFilter] = useState('all');
@@ -66,6 +65,7 @@ export const App: React.FC = () => {
     if (!trimmedTitle) {
       setErrorMessage('Title should not be empty');
       setTimeout(() => setErrorMessage(''), 3000);
+
       return;
     }
 
@@ -98,6 +98,7 @@ export const App: React.FC = () => {
 
   const clearCompleted = () => {
     const completedTodos = todos.filter(todo => todo.completed);
+
     completedTodos.forEach(todo => {
       deleteTodo(todo.id);
     });
